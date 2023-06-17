@@ -1,12 +1,12 @@
 <script lang="ts">
-	import { enhance } from '$app/forms'
-	import { PUBLIC_API_URL } from '$env/static/public'
-	import type { ActionData } from './$types'
-	import { fade } from 'svelte/transition'
+	import { enhance } from '$app/forms';
+	import { PUBLIC_API_URL } from '$env/static/public';
+	import type { ActionData } from './$types';
+	import { fade } from 'svelte/transition';
 
-	export let form: ActionData
+	export let form: ActionData;
 
-	let loading = false
+	let loading = false;
 </script>
 
 <svelte:head>
@@ -38,12 +38,12 @@
 				enctype="multipart/form-data"
 				method="POST"
 				use:enhance={() => {
-					loading = true
+					loading = true;
 
 					return async ({ update }) => {
-						await update()
-						loading = false
-					}
+						await update();
+						loading = false;
+					};
 				}}
 			>
 				<div class="mb-4">

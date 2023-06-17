@@ -1,54 +1,54 @@
 <script lang="ts">
-	import md5 from 'md5'
-	import HomeTopBar from '../../components/HomeTopBar.svelte'
-	import PostContainer from '../../components/PostContainer.svelte'
-	import type { PageData } from './$types'
+	import md5 from 'md5';
+	import HomeTopBar from '../../components/HomeTopBar.svelte';
+	import PostContainer from '../../components/PostContainer.svelte';
+	import type { PageData } from './$types';
 
-	export let data: PageData
-	const emailHash = md5(data.me.email.toLocaleLowerCase().trim())
-	const gravatarUrl = `https://www.gravatar.com/avatar/${emailHash}?s=48&d=retro&r=g`
+	export let data: PageData;
+	const emailHash = md5(data.me.email.toLocaleLowerCase().trim());
+	const gravatarUrl = `https://www.gravatar.com/avatar/${emailHash}?s=48&d=retro&r=g`;
 
-	let imageInput: HTMLInputElement
-	let previewImageElement: HTMLImageElement
-	let showImage = false
-	let textAreaElement: HTMLTextAreaElement
-	let inputLength = 0
-	const maxInputLength = 128
+	let imageInput: HTMLInputElement;
+	let previewImageElement: HTMLImageElement;
+	let showImage = false;
+	let textAreaElement: HTMLTextAreaElement;
+	let inputLength = 0;
+	const maxInputLength = 128;
 
 	function onImageInputChange() {
 		if (imageInput.files === null) {
-			showImage = false
-			return
+			showImage = false;
+			return;
 		}
 
-		const file = imageInput.files[0]
+		const file = imageInput.files[0];
 		if (file) {
-			showImage = true
-			const reader = new FileReader()
+			showImage = true;
+			const reader = new FileReader();
 
 			reader.onload = () => {
-				previewImageElement.setAttribute('src', reader.result as string)
-			}
-			reader.readAsDataURL(file)
-			return
+				previewImageElement.setAttribute('src', reader.result as string);
+			};
+			reader.readAsDataURL(file);
+			return;
 		}
-		showImage = false
+		showImage = false;
 	}
 
 	function removeImageInput() {
-		imageInput.files = null
-		showImage = false
+		imageInput.files = null;
+		showImage = false;
 	}
 
 	function onContentChange() {
-		const scrollHeight = textAreaElement.scrollHeight
-		textAreaElement.style.height = scrollHeight + 'px'
+		const scrollHeight = textAreaElement.scrollHeight;
+		textAreaElement.style.height = scrollHeight + 'px';
 
-		const textLength = textAreaElement.value.length
+		const textLength = textAreaElement.value.length;
 		if (textLength <= maxInputLength) {
-			inputLength = textLength
+			inputLength = textLength;
 		} else {
-			textAreaElement.value = textAreaElement.value.slice(0, maxInputLength)
+			textAreaElement.value = textAreaElement.value.slice(0, maxInputLength);
 		}
 	}
 </script>

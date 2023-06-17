@@ -6,7 +6,7 @@ declare global {
 		// interface Error {}
 		// eslint-disable-next-line no-unused-vars
 		interface Locals {
-			session: string | undefined
+			session: string | undefined;
 		}
 
 		// interface PageData {}
@@ -14,4 +14,4 @@ declare global {
 	}
 }
 
-export {}
+export {};

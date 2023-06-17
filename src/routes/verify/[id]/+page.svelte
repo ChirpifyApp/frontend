@@ -1,27 +1,27 @@
 <script lang="ts">
-	import { goto } from '$app/navigation'
-	import { afterUpdate } from 'svelte'
-	import Pincode from 'svelte-pincode/src/unstyled/Pincode.svelte'
-	import PincodeInput from 'svelte-pincode/src/unstyled/PincodeInput.svelte'
-	import type { PageData } from './$types'
+	import { goto } from '$app/navigation';
+	import { afterUpdate } from 'svelte';
+	import Pincode from 'svelte-pincode/src/unstyled/Pincode.svelte';
+	import PincodeInput from 'svelte-pincode/src/unstyled/PincodeInput.svelte';
+	import type { PageData } from './$types';
 
-	export let data: PageData
+	export let data: PageData;
 
-	let pincode
-	let code = data.code?.split('')
-	let value = ''
-	let complete = false
-	let loading = false
-	let error: boolean
-	$: error = data.status !== undefined && data.status !== 200
+	let pincode;
+	let code = data.code?.split('');
+	let value = '';
+	let complete = false;
+	let loading = false;
+	let error: boolean;
+	$: error = data.status !== undefined && data.status !== 200;
 
 	afterUpdate(() => {
 		if (data.success) {
 			setTimeout(() => {
-				goto('/home')
-			}, 5000)
+				goto('/home');
+			}, 5000);
 		}
-	})
+	});
 </script>
 
 <main class="flex h-screen min-h-screen flex-col items-center justify-center bg-zinc-900">
@@ -96,9 +96,9 @@
 			bind:complete
 			class="mb-4 flex w-full max-w-sm justify-between border-0"
 			on:complete={async () => {
-				loading = true
-				await goto(`/verify/${data.uuid}?code=${value}`, { invalidateAll: true })
-				loading = false
+				loading = true;
+				await goto(`/verify/${data.uuid}?code=${value}`, { invalidateAll: true });
+				loading = false;
 			}}
 		>
 			<PincodeInput class={error ? 'code-input-error' : 'code-input'} />
@@ -133,9 +133,9 @@
 			class="w-full max-w-sm rounded-lg border border-zinc-700 border-opacity-50 py-3 font-medium text-zinc-100 hover:bg-zinc-800"
 			disabled={loading || !complete}
 			on:click|preventDefault={async () => {
-				loading = true
-				await goto(`/verify/${data.uuid}?code=${value}`, { invalidateAll: true })
-				loading = false
+				loading = true;
+				await goto(`/verify/${data.uuid}?code=${value}`, { invalidateAll: true });
+				loading = false;
 			}}
 		>
 			{#if loading}

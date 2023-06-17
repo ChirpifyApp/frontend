@@ -5,13 +5,13 @@
 </style>
 
 <script lang="ts">
-	import md5 from 'md5'
+	import md5 from 'md5';
 
-	export let email: string
-	export let name: string | null
+	export let email: string;
+	export let name: string | null;
 
-	const emailHash = md5(email.toLocaleLowerCase().trim())
-	const gravatarUrl = `https://www.gravatar.com/avatar/${emailHash}?s=48&d=retro&r=g`
+	const emailHash = md5(email.toLocaleLowerCase().trim());
+	const gravatarUrl = `https://www.gravatar.com/avatar/${emailHash}?s=48&d=retro&r=g`;
 </script>
 
 <header class="flex items-center justify-center bg-zinc-900 pb-12 pt-4">

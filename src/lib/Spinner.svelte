@@ -407,7 +407,7 @@
 </style>
 
 <script>
-	export let spinner = ''
+	export let spinner = '';
 </script>
 
 {#if spinner === 'bubbles'}

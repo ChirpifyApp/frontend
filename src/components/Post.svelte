@@ -1,39 +1,39 @@
 <script lang="ts">
 	import md5 from 'md5';
 
-	export let name: string | null
-	export let email: string
-	export let content: string
-	export let imageUrl: string | null
-	export let likeCount: number
-	export let dislikeCount: number
-	export let id: number
-	export let liked: -1 | 0 | 1
-	export let date: string
+	export let name: string | null;
+	export let email: string;
+	export let content: string;
+	export let imageUrl: string | null;
+	export let likeCount: number;
+	export let dislikeCount: number;
+	export let id: number;
+	export let liked: -1 | 0 | 1;
+	export let date: string;
 
 	function formatDate(isoDateString: string) {
-		const date = new Date(isoDateString)
+		const date = new Date(isoDateString);
 
 		const formatter = new Intl.DateTimeFormat('en-US', {
 			day: '2-digit',
 			month: 'short',
 			year: 'numeric'
-		})
+		});
 
-		const parts = formatter.formatToParts(date)
-		return `${parts[2].value} ${parts[0].value} ${parts[4].value}`
+		const parts = formatter.formatToParts(date);
+		return `${parts[2].value} ${parts[0].value} ${parts[4].value}`;
 	}
 
 	async function likePost() {
-		if (liked === 1) return
+		if (liked === 1) return;
 	}
 
 	async function dislikePost() {
-		if (liked === -1) return
+		if (liked === -1) return;
 	}
 
-	const emailHash = md5(email.toLocaleLowerCase().trim())
-	const gravatarUrl = `https://www.gravatar.com/avatar/${emailHash}?s=48&d=retro&r=g`
+	const emailHash = md5(email.toLocaleLowerCase().trim());
+	const gravatarUrl = `https://www.gravatar.com/avatar/${emailHash}?s=48&d=retro&r=g`;
 </script>
 
 <div
