@@ -1,32 +1,39 @@
 <script lang="ts">
-	import { goto } from '$app/navigation';
-	import { afterUpdate } from 'svelte';
-	import Pincode from 'svelte-pincode/src/unstyled/Pincode.svelte';
-	import PincodeInput from 'svelte-pincode/src/unstyled/PincodeInput.svelte';
-	import type { PageData } from './$types';
+	import { goto } from '$app/navigation'
+	import { afterUpdate } from 'svelte'
+	import Pincode from 'svelte-pincode/src/unstyled/Pincode.svelte'
+	import PincodeInput from 'svelte-pincode/src/unstyled/PincodeInput.svelte'
+	import type { PageData } from './$types'
 
-	export let data: PageData;
+	export let data: PageData
 
-	let pincode;
-	let code = data.code?.split('');
-	let value = '';
-	let complete = false;
-	let loading = false;
-	let error: boolean;
-	$: error = data.status !== undefined && data.status !== 200;
+	let pincode
+	let code = data.code?.split('')
+	let value = ''
+	let complete = false
+	let loading = false
+	let error: boolean
+	$: error = data.status !== undefined && data.status !== 200
 
 	afterUpdate(() => {
 		if (data.success) {
 			setTimeout(() => {
-				goto('/home');
-			}, 5000);
+				goto('/home')
+			}, 5000)
 		}
-	});
+	})
 </script>
 
 <main class="flex h-screen min-h-screen flex-col items-center justify-center bg-zinc-900">
 	{#if data.success}
-		<svg width="32" height="32" viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg" class="mb-4">
+		<svg
+			width="32"
+			height="32"
+			viewBox="0 0 32 32"
+			fill="none"
+			xmlns="http://www.w3.org/2000/svg"
+			class="mb-4"
+		>
 			<path
 				d="M9.00496 30.9924C8.82996 30.9874 8.65246 30.9724 8.47996 30.9424C7.39746 30.7499 6.50746 29.9824 6.15496 28.9424L1.15496 13.9424C0.629956 12.3674 1.47996 10.6674 3.05496 10.1424C4.62996 9.61742 6.32996 10.4674 6.85496 12.0424L10.105 21.7924L25.655 2.14242C26.6825 0.837417 28.575 0.614918 29.88 1.64242C31.185 2.66992 31.4075 4.56242 30.38 5.86742L11.38 29.8674C10.795 30.5774 9.92496 30.9899 9.00496 30.9924Z"
 				fill="#546D7A"
@@ -78,8 +85,8 @@
 	{:else}
 		<h1 class="mb-4 font-semibold text-zinc-100 text-2xl">Check your email!</h1>
 		<p class="mb-8 max-w-sm text-center text-zinc-400">
-			In order to start using Chirpify, you need to verify your account. We sent you a verification code to the
-			email address you used.
+			In order to start using Chirpify, you need to verify your account. We sent you a
+			verification code to the email address you used.
 		</p>
 
 		<Pincode
@@ -89,9 +96,9 @@
 			bind:complete
 			class="mb-4 flex w-full max-w-sm justify-between border-0"
 			on:complete={async () => {
-				loading = true;
-				await goto(`/verify/${data.uuid}?code=${value}`, { invalidateAll: true });
-				loading = false;
+				loading = true
+				await goto(`/verify/${data.uuid}?code=${value}`, { invalidateAll: true })
+				loading = false
 			}}
 		>
 			<PincodeInput class={error ? 'code-input-error' : 'code-input'} />
@@ -126,9 +133,9 @@
 			class="w-full max-w-sm rounded-lg border border-zinc-700 border-opacity-50 py-3 font-medium text-zinc-100 hover:bg-zinc-800"
 			disabled={loading || !complete}
 			on:click|preventDefault={async () => {
-				loading = true;
-				await goto(`/verify/${data.uuid}?code=${value}`, { invalidateAll: true });
-				loading = false;
+				loading = true
+				await goto(`/verify/${data.uuid}?code=${value}`, { invalidateAll: true })
+				loading = false
 			}}
 		>
 			{#if loading}

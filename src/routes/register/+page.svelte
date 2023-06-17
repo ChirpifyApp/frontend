@@ -1,12 +1,12 @@
 <script lang="ts">
-	import { enhance } from '$app/forms';
-	import { PUBLIC_API_URL } from '$env/static/public';
-	import type { ActionData } from './$types';
-	import { fade } from 'svelte/transition';
+	import { enhance } from '$app/forms'
+	import { PUBLIC_API_URL } from '$env/static/public'
+	import type { ActionData } from './$types'
+	import { fade } from 'svelte/transition'
 
-	export let form: ActionData;
+	export let form: ActionData
 
-	let loading = false;
+	let loading = false
 </script>
 
 <svelte:head>
@@ -18,10 +18,14 @@
 		<div>
 			<h1 class="mb-6 font-bold text-5xl">Chirpify</h1>
 			<p class="mb-2 max-w-prose text-zinc-400">
-				Lorem ipsum dolor sit amet consectetur. Vulputate massa semper orci cursus habitasse pellentesque amet
-				cras sit. Urna lacinia sit egestas amet vitae.
+				Lorem ipsum dolor sit amet consectetur. Vulputate massa semper orci cursus habitasse
+				pellentesque amet cras sit. Urna lacinia sit egestas amet vitae.
 			</p>
-			<a href="https://github.com/ChirpifyApp" target="_blank" class="font-medium text-zinc-400 hover:underline">
+			<a
+				class="font-medium text-zinc-400 hover:underline"
+				href="https://github.com/ChirpifyApp"
+				target="_blank"
+			>
 				Github Repository →
 			</a>
 		</div>
@@ -30,47 +34,47 @@
 		<div class="w-full max-w-prose xl:max-w-sm">
 			<h1 class="mb-6 font-semibold text-2xl">Create an account</h1>
 			<form
-				method="POST"
 				action="?/register"
 				enctype="multipart/form-data"
+				method="POST"
 				use:enhance={() => {
-					loading = true;
+					loading = true
 
 					return async ({ update }) => {
-						await update();
-						loading = false;
-					};
+						await update()
+						loading = false
+					}
 				}}
 			>
 				<div class="mb-4">
-					<label for="email" class="mb-2 block font-medium">Email address</label>
+					<label class="mb-2 block font-medium" for="email">Email address</label>
 					<input
-						type="email"
 						id="email"
 						name="email"
+						placeholder="Enter your email address"
 						class="w-full rounded-lg border border-zinc-600 border-opacity-50 bg-zinc-800 px-4 py-3 placeholder-zinc-400
 					focus:border-blue-500 focus:outline-none focus:ring-1 focus:ring-blue-600"
-						placeholder="Enter your email address"
+						type="email"
 						required
 					/>
 				</div>
 				<div class="mb-4">
-					<label for="email" class="mb-2 block font-medium">Password</label>
+					<label class="mb-2 block font-medium" for="email">Password</label>
 					<input
-						type="password"
 						id="password"
 						name="password"
+						type="password"
 						class="w-full rounded-lg border border-zinc-600 border-opacity-50 bg-zinc-800 px-4 py-3
 					focus:border-blue-500 focus:outline-none focus:ring-1 focus:ring-blue-600"
 						required
 					/>
 				</div>
 				<div class="mb-4">
-					<label for="email" class="mb-2 block font-medium">Repeat password</label>
+					<label class="mb-2 block font-medium" for="email">Repeat password</label>
 					<input
-						type="password"
 						id="repeatPassword"
 						name="repeatPassword"
+						type="password"
 						class="w-full rounded-lg border border-zinc-600 border-opacity-50 bg-zinc-800 px-4 py-3
 					focus:border-blue-500 focus:outline-none focus:ring-1 focus:ring-blue-600"
 						required
@@ -128,11 +132,11 @@
 					href="{PUBLIC_API_URL}/auth/discord/login"
 				>
 					<svg
-						width="24"
+						class="fill-zinc-100"
 						height="19"
 						viewBox="0 0 24 19"
+						width="24"
 						xmlns="http://www.w3.org/2000/svg"
-						class="fill-zinc-100"
 					>
 						<path
 							d="M20.3303 1.52238C18.7535 0.800473 17.0889 0.288326 15.3789 -0.000976562C15.1449 0.417312 14.9332 0.847674 14.7447 1.28831C12.9233 1.01385 11.071 1.01385 9.24963 1.28831C9.06097 0.84772 8.84926 0.417362 8.61537 -0.000976562C6.90435 0.290769 5.23861 0.804132 3.6602 1.52616C0.526645 6.16231 -0.322812 10.6833 0.101917 15.1401C1.937 16.496 3.99099 17.5271 6.17459 18.1887C6.66628 17.5274 7.10135 16.8259 7.47521 16.0915C6.76512 15.8263 6.07977 15.4991 5.42707 15.1137C5.59885 14.9891 5.76685 14.8608 5.92919 14.7362C7.82839 15.6293 9.90126 16.0924 12 16.0924C14.0987 16.0924 16.1716 15.6293 18.0708 14.7362C18.235 14.8702 18.403 14.9986 18.5729 15.1137C17.9189 15.4997 17.2323 15.8276 16.521 16.0934C16.8944 16.8274 17.3295 17.5284 17.8216 18.1887C20.0071 17.5298 22.0626 16.4991 23.898 15.142C24.3964 9.97354 23.0467 5.49407 20.3303 1.52238ZM8.0132 12.3992C6.82962 12.3992 5.8518 11.3251 5.8518 10.0037C5.8518 8.68236 6.79564 7.59883 8.00942 7.59883C9.2232 7.59883 10.1935 8.68236 10.1727 10.0037C10.1519 11.3251 9.21943 12.3992 8.0132 12.3992ZM15.9868 12.3992C14.8013 12.3992 13.8273 11.3251 13.8273 10.0037C13.8273 8.68236 14.7711 7.59883 15.9868 7.59883C17.2024 7.59883 18.1652 8.68236 18.1444 10.0037C18.1236 11.3251 17.193 12.3992 15.9868 12.3992Z"
@@ -143,7 +147,9 @@
 				</a>
 			</form>
 			<div class="flex flex-col items-center justify-between xsm:flex-row">
-				<a href="/login" class="text-zinc-400 hover:underline">I already have an account ↗</a>
+				<a class="text-zinc-400 hover:underline" href="/login"
+					>I already have an account ↗</a
+				>
 			</div>
 		</div>
 	</div>

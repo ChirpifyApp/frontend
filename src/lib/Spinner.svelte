@@ -1,58 +1,13 @@
-<script>
-	export let spinner = '';
-</script>
-
-{#if spinner === 'bubbles'}
-	<!-- BUBBLES -->
-	<span class="loading-bubbles">
-		<span class="bubble-item" />
-		<span class="bubble-item" />
-		<span class="bubble-item" />
-		<span class="bubble-item" />
-		<span class="bubble-item" />
-		<span class="bubble-item" />
-		<span class="bubble-item" />
-		<span class="bubble-item" />
-	</span>
-{:else if spinner === 'circles'}
-	<!-- CIRCLES -->
-	<span class="loading-circles">
-		<span class="circle-item" />
-		<span class="circle-item" />
-		<span class="circle-item" />
-		<span class="circle-item" />
-		<span class="circle-item" />
-		<span class="circle-item" />
-		<span class="circle-item" />
-		<span class="circle-item" />
-	</span>
-{:else if spinner === 'spiral'}
-	<!-- SPIRAL -->
-	<i class="loading-spiral" />
-{:else if spinner === 'wavedots'}
-	<!-- WAVEDOTS -->
-	<span class="loading-wave-dots">
-		<span class="wave-item" />
-		<span class="wave-item" />
-		<span class="wave-item" />
-		<span class="wave-item" />
-		<span class="wave-item" />
-	</span>
-{:else}
-	<!-- DEFAULT -->
-	<i class="loading-default" />
-{/if}
-
 <style>
 	/* THIS IS THE COMPILED spinner.less STYLESHEET FROM vue-infinite-loading */
 	/* COMPILED BECAUSE OTHERWISE THE USER WOULD HAVE TO ADD AN less PREPROCESSOR */
 
 	.loading-wave-dots {
 		/*
-		$size: 8px;
-		$wave: -6px;
-		$delay: .14s;
-		*/
+			$size: 8px;
+			$wave: -6px;
+			$delay: .14s;
+			*/
 
 		position: relative;
 	}
@@ -145,13 +100,13 @@
 	}
 
 	/*
-	.loading-circles {
-		$size: 5px;
-		$radius: 12px;
-		$shallow: 56%;
-		$c-basic: #505050;
-	}
-	*/
+	  .loading-circles {
+		  $size: 5px;
+		  $radius: 12px;
+		  $shallow: 56%;
+		  $c-basic: #505050;
+	  }
+	  */
 
 	.loading-circles .circle-item {
 		width: 5px; /*  = $size  */
@@ -225,13 +180,13 @@
 	}
 
 	/*
-	.loading-bubbles {
-		$size: 1px;
-		$radius: 12px;
-		$shallow: 3px;
-		$c-basic: #666;
-	}
-	*/
+	  .loading-bubbles {
+		  $size: 1px;
+		  $radius: 12px;
+		  $shallow: 3px;
+		  $c-basic: #666;
+	  }
+	  */
 
 	.loading-bubbles .bubble-item {
 		background: #666; /*  = $c-basic  */
@@ -325,8 +280,8 @@
 
 	.loading-default:before {
 		/*
-		$size: 6px
-		*/
+			$size: 6px
+			*/
 
 		content: '';
 		position: absolute;
@@ -380,8 +335,8 @@
 	.loading-circles .circle-item,
 	.loading-bubbles .bubble-item {
 		/*
-		$delay: .093s
-		*/
+			$delay: .093s
+			*/
 
 		position: absolute;
 		top: 50%;
@@ -438,8 +393,8 @@
 	.loading-wave-dots,
 	.loading-default {
 		/*
-		$size: 28px
-		*/
+			$size: 28px
+			*/
 
 		display: inline-block;
 		margin: 5px 0;
@@ -450,3 +405,48 @@
 		border-radius: 50%;
 	}
 </style>
+
+<script>
+	export let spinner = ''
+</script>
+
+{#if spinner === 'bubbles'}
+	<!-- BUBBLES -->
+	<span class="loading-bubbles">
+		<span class="bubble-item" />
+		<span class="bubble-item" />
+		<span class="bubble-item" />
+		<span class="bubble-item" />
+		<span class="bubble-item" />
+		<span class="bubble-item" />
+		<span class="bubble-item" />
+		<span class="bubble-item" />
+	</span>
+{:else if spinner === 'circles'}
+	<!-- CIRCLES -->
+	<span class="loading-circles">
+		<span class="circle-item" />
+		<span class="circle-item" />
+		<span class="circle-item" />
+		<span class="circle-item" />
+		<span class="circle-item" />
+		<span class="circle-item" />
+		<span class="circle-item" />
+		<span class="circle-item" />
+	</span>
+{:else if spinner === 'spiral'}
+	<!-- SPIRAL -->
+	<i class="loading-spiral" />
+{:else if spinner === 'wavedots'}
+	<!-- WAVEDOTS -->
+	<span class="loading-wave-dots">
+		<span class="wave-item" />
+		<span class="wave-item" />
+		<span class="wave-item" />
+		<span class="wave-item" />
+		<span class="wave-item" />
+	</span>
+{:else}
+	<!-- DEFAULT -->
+	<i class="loading-default" />
+{/if}

@@ -1,53 +1,54 @@
 <script lang="ts">
-	import { PUBLIC_API_URL } from '$env/static/public';
-	import InfiniteLoading from '$lib/InfiniteLoading.svelte';
-	import { onMount } from 'svelte';
-	import Post from './Post.svelte';
+	import { PUBLIC_API_URL } from '$env/static/public'
+	import InfiniteLoading from '$lib/InfiniteLoading.svelte'
+	import { onMount } from 'svelte'
+	import Post from './Post.svelte'
+	import type { IPost } from '../interfaces'
 
-	export let userId: number;
-	export let endpoint: string;
+	export let userId: number
+	export let endpoint: string
 
-	let page = 1;
-	let loadedPosts: IPost[] = [];
-	let newPosts: IPost[] = [];
+	let page = 1
+	let loadedPosts: IPost[] = []
+	let newPosts: IPost[] = []
 
 	onMount(async () => {
 		// First fetch
 		const response = await fetch(`${PUBLIC_API_URL}${endpoint}/${page}`, {
 			credentials: 'include'
-		});
-		const json = await response.json();
+		})
+		const json = await response.json()
 		if (json.data.length) {
-			newPosts = json.data;
-			page += 1;
+			newPosts = json.data
+			page += 1
 		}
-	});
+	})
 
 	function delay(milliseconds: number) {
-		return new Promise((resolve) => {
-			setTimeout(resolve, milliseconds);
-		});
+		return new Promise(resolve => {
+			setTimeout(resolve, milliseconds)
+		})
 	}
 
 	// @ts-ignore
 	async function fetchData({ detail: { loaded, complete } }) {
-		console.log('fetching data');
-		await delay(500);
+		console.log('fetching data')
+		await delay(500)
 		const response = await fetch(`${PUBLIC_API_URL}${endpoint}/${page}`, {
 			credentials: 'include'
-		});
-		const json = await response.json();
+		})
+		const json = await response.json()
 		if (json.data.length) {
-			newPosts = json.data;
-			page += 1;
+			newPosts = json.data
+			page += 1
 
-			loaded();
+			loaded()
 		} else {
-			complete();
+			complete()
 		}
 	}
 
-	$: loadedPosts = [...loadedPosts, ...newPosts];
+	$: loadedPosts = [...loadedPosts, ...newPosts]
 </script>
 
 <div>
@@ -59,9 +60,9 @@
 			imageUrl={post.imageUrl}
 			likeCount={post.likedBy.length}
 			dislikeCount={post.dislikedBy.length}
-			liked={post.likedBy.find((user) => user.id === userId)
+			liked={post.likedBy.find(user => user.id === userId)
 				? 1
-				: post.dislikedBy.find((user) => user.id === userId)
+				: post.dislikedBy.find(user => user.id === userId)
 				? -1
 				: 0}
 			date={post.createdAt}
@@ -70,12 +71,12 @@
 	{/each}
 	<InfiniteLoading on:infinite={fetchData}>
 		<div slot="spinner">
-			<div role="status" class="mb-4 text-center">
+			<div class="mb-4 text-center" role="status">
 				<svg
 					aria-hidden="true"
 					class="inline h-5 w-5 animate-spin fill-neutral-100 text-neutral-400"
-					viewBox="0 0 100 101"
 					fill="none"
+					viewBox="0 0 100 101"
 					xmlns="http://www.w3.org/2000/svg"
 				>
 					<path
@@ -90,8 +91,8 @@
 				<span class="sr-only">Loading...</span>
 			</div>
 		</div>
-		<div slot="noResults" class="mb-4 text-zinc-700">That's all :)</div>
-		<div slot="noMore" class="mb-4 text-zinc-700">That's all :)</div>
-		<div slot="error" class="text-red-500">There was an error loading more items.</div>
+		<div class="mb-4 text-zinc-700" slot="noResults">That's all :)</div>
+		<div class="mb-4 text-zinc-700" slot="noMore">That's all :)</div>
+		<div class="text-red-500" slot="error">There was an error loading more items.</div>
 	</InfiniteLoading>
 </div>

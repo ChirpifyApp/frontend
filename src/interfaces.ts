@@ -1,20 +1,21 @@
-interface IPost {
-	id: number;
-	content: string;
-	authorId: number;
-	imageUrl: string | null;
-	author: IUser;
-	createdAt: string;
-	updatedAt: string;
-	likedBy: ID[];
-	dislikedBy: ID[];
+// eslint-disable-next-line no-unused-vars
+export interface IPost {
+	id: number
+	content: string
+	authorId: number
+	imageUrl: string | null
+	author: IUser
+	createdAt: string
+	updatedAt: string
+	likedBy: ID[]
+	dislikedBy: ID[]
 }
 
-interface ID {
-	id: number;
+export interface ID {
+	id: number
 }
 
-interface IUser {
-	name: string | null;
-	email: string;
+export interface IUser {
+	name: string | null
+	email: string
 }
