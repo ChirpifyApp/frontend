@@ -5,6 +5,7 @@
 	import type { PageData } from './$types';
 
 	export let data: PageData;
+
 	const emailHash = md5(data.me.email.toLocaleLowerCase().trim());
 	const gravatarUrl = `https://www.gravatar.com/avatar/${emailHash}?s=48&d=retro&r=g`;
 
@@ -41,6 +42,11 @@
 	}
 
 	function onContentChange() {
+		if (textAreaElement.value === '') {
+			textAreaElement.style.height = 'auto';
+			inputLength = 0;
+			return;
+		}
 		const scrollHeight = textAreaElement.scrollHeight;
 		textAreaElement.style.height = scrollHeight + 'px';
 
@@ -48,6 +54,7 @@
 		if (textLength <= maxInputLength) {
 			inputLength = textLength;
 		} else {
+			inputLength = maxInputLength;
 			textAreaElement.value = textAreaElement.value.slice(0, maxInputLength);
 		}
 	}
@@ -57,13 +64,13 @@
 	<title>Home</title>
 </svelte:head>
 
-<main class="min-h-screen bg-zinc-900 px-4">
-	<HomeTopBar email="methalicity@gmail.com" name={data.me.name} />
-	<section class="min-w-screen flex flex-col items-center justify-center gap-4 bg-zinc-900">
+<main class='min-h-screen bg-zinc-900 px-4 flex items-center flex-col'>
+	<HomeTopBar email={data.me.email} name={data.me.name} />
+	<section class='min-w-screen flex max-w-lg flex-col items-center justify-center bg-zinc-900'>
 		<form
 			class="flex h-auto w-full max-w-lg gap-4 rounded-lg border border-zinc-700 border-opacity-50 p-4"
 		>
-			<img alt="Post image" class="mr-4 h-10 w-10 rounded-full" src={gravatarUrl} />
+			<img alt='Your avatar' class='mr-4 h-10 w-10 rounded-full' src={gravatarUrl} />
 			<div class="flex-grow">
 				<div class="mb-4 flex w-full justify-between">
 					<textarea
@@ -72,8 +79,7 @@
 						id="content"
 						name="content"
 						on:input={onContentChange}
-						placeholder="Type something..."
-					/>
+						placeholder='Type something...'></textarea>
 					<p
 						class="cursor-default {inputLength === maxInputLength
 							? 'text-red-400'
@@ -86,7 +92,7 @@
 					<div class="mb-4">
 						<img
 							src=""
-							alt="Post image"
+							alt='Post'
 							class="w-full rounded-lg border border-zinc-700 border-opacity-50"
 							bind:this={previewImageElement}
 						/>
@@ -178,17 +184,7 @@
 				</div>
 			</div>
 		</form>
+		<h2 class='py-8 text-2xl font-bold self-start'>Most recent</h2>
 		<PostContainer endpoint="/posts/recent" userId={data.me.id} />
-		<!-- <Post
-			name="John Doe"
-			email="methalicity@gmail.com"
-			content="Tak dobre som sa dnes vysral v aule magne 😏"
-			imageUrl="https://uploads-ssl.webflow.com/5eb98fe916cf6d58ddb2511b/5ebc2624992f58676244e412_aula-euba-galeria2.jpg"
-			likeCount={14}
-			dislikeCount={2}
-			liked={1}
-			date="12 Feb"
-			id="123"
-		/> -->
 	</section>
 </main>

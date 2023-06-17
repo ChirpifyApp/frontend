@@ -32,8 +32,6 @@
 
 	// @ts-ignore
 	async function fetchData({ detail: { loaded, complete } }) {
-		console.log('fetching data');
-		await delay(500);
 		const response = await fetch(`${PUBLIC_API_URL}${endpoint}/${page}`, {
 			credentials: 'include'
 		});

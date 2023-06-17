@@ -16,8 +16,6 @@ export const load = (async ({ url, cookies }) => {
 	// already used: 401
 	// invalid combo: 500
 
-	console.log(response.status);
-
 	if (response.status === 200) {
 		const body = await response.json();
 		cookies.set('session', body.jwt, { maxAge: 86400, secure: true, path: '/' });

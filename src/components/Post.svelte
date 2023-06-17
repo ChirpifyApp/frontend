@@ -40,7 +40,7 @@
 	class="mb-4 flex w-full max-w-lg rounded-lg border border-zinc-700 border-opacity-50 p-4"
 	data-post-id={id}
 >
-	<img alt="Post image" class="mr-4 h-10 w-10 rounded-full" src={gravatarUrl} />
+	<img alt="Post author" class="mr-4 h-10 w-10 rounded-full" src={gravatarUrl} />
 	<div class="w-full">
 		<!-- Author -->
 		<div class="mb-0.5 flex justify-between">
@@ -77,7 +77,7 @@
 			{#if imageUrl !== null}
 				<img
 					src={imageUrl}
-					alt="Post image"
+					alt="Post"
 					class="w-full rounded-lg border border-zinc-700 border-opacity-50"
 				/>
 			{/if}
