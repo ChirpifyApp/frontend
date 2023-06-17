@@ -80,29 +80,30 @@
 		<div>
 			<h1 class="mb-6 font-bold text-5xl">Chirpify</h1>
 			<p class="mb-2 max-w-prose text-zinc-400">
-				Lorem ipsum dolor sit amet consectetur. Vulputate massa semper orci cursus habitasse
-				pellentesque amet cras sit. Urna lacinia sit egestas amet vitae.
+				Lorem ipsum dolor sit amet consectetur. Vulputate massa semper orci cursus habitasse pellentesque amet
+				cras sit. Urna lacinia sit egestas amet vitae.
 			</p>
-			<a
-				href="https://github.com/ChirpifyApp"
-				target="_blank"
-				class="font-medium text-zinc-400 hover:underline"
-			>
+			<a href="https://github.com/ChirpifyApp" target="_blank" class="font-medium text-zinc-400 hover:underline">
 				Github Repository →
 			</a>
 		</div>
 	</div>
-	<div class="flex items-center justify-center p-4 xl:p-32" transition:fade="{{ duration: 150 }}">
+	<div class="flex items-center justify-center p-4 xl:p-32" transition:fade={{ duration: 150 }}>
 		<div class="w-full max-w-prose xl:max-w-sm">
 			<h1 class="mb-6 font-semibold text-2xl">Welcome, please log in</h1>
-			<form method="POST" action="?/login" enctype="multipart/form-data" use:enhance={() => {
-				loading = true;
+			<form
+				method="POST"
+				action="?/login"
+				enctype="multipart/form-data"
+				use:enhance={() => {
+					loading = true;
 
-				return async ({ update }) => {
-					await update();
-					loading = false;
-				}
-			}}>
+					return async ({ update }) => {
+						await update();
+						loading = false;
+					};
+				}}
+			>
 				<div class="mb-4">
 					<label for="email" class="mb-2 block font-medium">Email address</label>
 					<input
@@ -148,7 +149,7 @@
 						<div role="status" class="text-center">
 							<svg
 								aria-hidden="true"
-								class="h-5 w-5 animate-spin fill-neutral-100 text-neutral-400 inline"
+								class="inline h-5 w-5 animate-spin fill-neutral-100 text-neutral-400"
 								viewBox="0 0 100 101"
 								fill="none"
 								xmlns="http://www.w3.org/2000/svg"

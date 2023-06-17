@@ -16,16 +16,12 @@
 			</button>
 			<div class="absolute right-0 mt-2 hidden">
 				<div class="flex flex-col">
-                    <div class="clip-bottom h-2 w-4 bg-zinc-800 self-end mr-4"></div>
-					<div
-						class="rounded-t-lg border-b border-zinc-600 border-opacity-50 bg-zinc-800 px-6 py-4"
-					>
-						<h3 class="font-medium">{name === null ? 'Name not set' : {name}}</h3>
+					<div class="clip-bottom mr-4 h-2 w-4 self-end bg-zinc-800" />
+					<div class="rounded-t-lg border-b border-zinc-600 border-opacity-50 bg-zinc-800 px-6 py-4">
+						<h3 class="font-medium">{name === null ? 'Name not set' : { name }}</h3>
 						<h4 class="text-zinc-400">{email}</h4>
 					</div>
-					<div
-						class="flex flex-col rounded-b-lg border-zinc-600 border-opacity-50 bg-zinc-800 px-6 py-4"
-					>
+					<div class="flex flex-col rounded-b-lg border-zinc-600 border-opacity-50 bg-zinc-800 px-6 py-4">
 						<a href="#" class="mb-2">Profile</a>
 						<a href="#">Sign out →</a>
 					</div>
@@ -36,7 +32,7 @@
 </header>
 
 <style>
-    .clip-bottom {
-        clip-path: polygon(100% 50%, 0 100%, 100% 100%, 50% 0, 0 100%);
-    }
+	.clip-bottom {
+		clip-path: polygon(100% 50%, 0 100%, 100% 100%, 50% 0, 0 100%);
+	}
 </style>

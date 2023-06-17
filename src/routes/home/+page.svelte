@@ -61,9 +61,7 @@
 <main class="min-h-screen bg-zinc-900 px-4">
 	<HomeTopBar email="methalicity@gmail.com" name={data.me.name} />
 	<section class="min-w-screen flex flex-col items-center justify-center gap-4 bg-zinc-900">
-		<form
-			class="flex h-auto w-full max-w-lg gap-4 rounded-lg border border-zinc-700 border-opacity-50 p-4"
-		>
+		<form class="flex h-auto w-full max-w-lg gap-4 rounded-lg border border-zinc-700 border-opacity-50 p-4">
 			<img src={gravatarUrl} alt="Post image" class="mr-4 h-10 w-10 rounded-full" />
 			<div class="flex-grow">
 				<div class="mb-4 flex w-full justify-between">
@@ -75,7 +73,9 @@
 						bind:this={textAreaElement}
 						on:input={onContentChange}
 					/>
-					<p class="cursor-default {inputLength === maxInputLength ? 'text-red-400' : 'text-zinc-400'} ml-4">{inputLength}/{maxInputLength}</p>
+					<p class="cursor-default {inputLength === maxInputLength ? 'text-red-400' : 'text-zinc-400'} ml-4">
+						{inputLength}/{maxInputLength}
+					</p>
 				</div>
 				{#if showImage}
 					<div class="mb-4">

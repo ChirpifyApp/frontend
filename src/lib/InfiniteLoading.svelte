@@ -1,5 +1,4 @@
 <script context="module">
-
 	const THROTTLE_LIMIT = 50;
 	const LOOP_CHECK_TIMEOUT = 1000;
 	const LOOP_CHECK_MAX_CALLS = 10;
@@ -17,9 +16,8 @@
 		'  ...',
 		'  <!-- set forceUseInfiniteWrapper as css selector of the real scroll wrapper -->',
 		'  <InfiniteLoading forceUseInfiniteWrapper=".infinite-wrapper" />',
-		'</div>',
+		'</div>'
 	].join('\n');
-
 
 	/**
 	 * the third argument for event bundler
@@ -33,7 +31,7 @@
 				get() {
 					supportsPassive = { passive: true };
 					return true;
-				},
+				}
 			});
 
 			window.addEventListener('testPassive', null, opts);
@@ -45,7 +43,6 @@
 		return supportsPassive;
 	})();
 
-
 	const throttler = {
 		timers: [],
 		caches: [],
@@ -56,13 +53,15 @@
 				this.caches.push(fn);
 
 				// save timer for current handler
-				this.timers.push(setTimeout(() => {
-					fn();
+				this.timers.push(
+					setTimeout(() => {
+						fn();
 
-					// empty cache and timer
-					this.caches.splice(this.caches.indexOf(fn), 1);
-					this.timers.shift();
-				}, THROTTLE_LIMIT));
+						// empty cache and timer
+						this.caches.splice(this.caches.indexOf(fn), 1);
+						this.timers.shift();
+					}, THROTTLE_LIMIT)
+				);
 			}
 		},
 
@@ -75,14 +74,13 @@
 
 			// empty caches
 			this.caches = [];
-		},
+		}
 	};
-
 
 	const loopTracker = {
 		isChecked: false,
-		timer:     null,
-		times:     0,
+		timer: null,
+		times: 0,
 
 		track() {
 			// record track times
@@ -99,9 +97,8 @@
 				console.error(ERROR_INFINITE_LOOP);
 				this.isChecked = true;
 			}
-		},
+		}
 	};
-
 
 	const scrollBarStorage = {
 		key: '_infiniteScrollHeight',
@@ -133,12 +130,11 @@
 				// remove scroll height
 				delete element[this.key]; // eslint-disable-line no-param-reassign
 			}
-		},
+		}
 	};
 
-
 	function isVisible(element) {
-		return element && (element.offsetWidth + element.offsetHeight) > 0;
+		return element && element.offsetWidth + element.offsetHeight > 0;
 	}
 </script>
 
@@ -149,10 +145,10 @@
 	const dispatch = createEventDispatcher();
 
 	const STATUS = {
-		READY:    0,
-		LOADING:  1,
+		READY: 0,
+		LOADING: 1,
 		COMPLETE: 2,
-		ERROR:    3,
+		ERROR: 3
 	};
 
 	export let distance = 100;
@@ -216,9 +212,8 @@
 		error: () => {
 			status = STATUS.ERROR;
 			throttler.reset();
-		},
+		}
 	};
-
 
 	function scrollHandler(event) {
 		if (status === STATUS.READY) {
@@ -261,7 +256,8 @@
 			distance = typeof scrollParent.scrollTop === 'number' ? scrollParent.scrollTop : scrollParent.pageYOffset;
 		} else {
 			const infiniteElementOffsetTopFromBottom = thisElement.getBoundingClientRect().top;
-			const scrollElementOffsetTopFromBottom = scrollParent === window ? window.innerHeight : scrollParent.getBoundingClientRect().bottom;
+			const scrollElementOffsetTopFromBottom =
+				scrollParent === window ? window.innerHeight : scrollParent.getBoundingClientRect().bottom;
 
 			distance = infiniteElementOffsetTopFromBottom - scrollElementOffsetTopFromBottom;
 		}
@@ -280,7 +276,10 @@
 		if (!result) {
 			if (element.tagName === 'BODY') {
 				result = window;
-			} else if (!forceUseInfiniteWrapper && ['scroll', 'auto'].indexOf(getComputedStyle(element).overflowY) > -1) {
+			} else if (
+				!forceUseInfiniteWrapper &&
+				['scroll', 'auto'].indexOf(getComputedStyle(element).overflowY) > -1
+			) {
 				result = element;
 			} else if (element.hasAttribute('infinite-wrapper') || element.hasAttribute('data-infinite-wrapper')) {
 				result = element;
@@ -333,17 +332,13 @@
 
 	{#if showNoResults}
 		<div class="infinite-status-prompt">
-			<slot name="noResults">
-				No results :(
-			</slot>
+			<slot name="noResults">No results :(</slot>
 		</div>
 	{/if}
 
 	{#if showNoMore}
 		<div class="infinite-status-prompt">
-			<slot name="noMore">
-				No more data :)
-			</slot>
+			<slot name="noMore">No more data :)</slot>
 		</div>
 	{/if}
 
@@ -351,10 +346,8 @@
 		<div class="infinite-status-prompt">
 			<slot name="error" {attemptLoad}>
 				Oops, something went wrong :(
-				<br>
-				<button class="btn-try-infinite" on:click={attemptLoad}>
-					Retry
-				</button>
+				<br />
+				<button class="btn-try-infinite" on:click={attemptLoad}> Retry </button>
 			</slot>
 		</div>
 	{/if}
@@ -362,21 +355,21 @@
 
 <style>
 	.infinite-loading-container {
-		clear:      both;
+		clear: both;
 		text-align: center;
 	}
 
 	.btn-try-infinite {
-		margin-top:    5px;
-		padding:       5px 10px;
-		color:         #999;
-		font-size:     14px;
-		line-height:   1;
-		background:    transparent;
-		border:        1px solid #ccc;
+		margin-top: 5px;
+		padding: 5px 10px;
+		color: #999;
+		font-size: 14px;
+		line-height: 1;
+		background: transparent;
+		border: 1px solid #ccc;
 		border-radius: 3px;
-		outline:       none;
-		cursor:        pointer;
+		outline: none;
+		cursor: pointer;
 	}
 
 	.btn-try-infinite:not(:active):hover {

@@ -20,7 +20,7 @@
 		if (json.data.length) {
 			newPosts = json.data;
 			page += 1;
-		} 
+		}
 	});
 
 	function delay(milliseconds: number) {

@@ -7,10 +7,7 @@ export const load = (async ({ url, cookies }) => {
 	const params = url.searchParams;
 	const code = params.get('code');
 
-	const response = await fetch(
-		`${PUBLIC_API_URL}/users/verify/${uuid}${code ? `?code=${code}` : ''}`,
-		{}
-	);
+	const response = await fetch(`${PUBLIC_API_URL}/users/verify/${uuid}${code ? `?code=${code}` : ''}`, {});
 
 	// not existing code: 404
 	// already used: 401

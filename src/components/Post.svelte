@@ -38,10 +38,7 @@
 	const gravatarUrl = `https://www.gravatar.com/avatar/${emailHash}?s=48&d=retro&r=g`;
 </script>
 
-<div
-	class="mb-4 flex w-full max-w-lg rounded-lg border border-zinc-700 border-opacity-50 p-4"
-	data-post-id={id}
->
+<div class="mb-4 flex w-full max-w-lg rounded-lg border border-zinc-700 border-opacity-50 p-4" data-post-id={id}>
 	<img src={gravatarUrl} alt="Post image" class="mr-4 h-10 w-10 rounded-full" />
 	<div class="w-full">
 		<!-- Author -->
