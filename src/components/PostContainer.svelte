@@ -23,13 +23,6 @@
 			page += 1;
 		}
 	});
-
-	function delay(milliseconds: number) {
-		return new Promise(resolve => {
-			setTimeout(resolve, milliseconds);
-		});
-	}
-
 	// @ts-ignore
 	async function fetchData({ detail: { loaded, complete } }) {
 		const response = await fetch(`${PUBLIC_API_URL}${endpoint}/${page}`, {
