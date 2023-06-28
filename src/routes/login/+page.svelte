@@ -80,7 +80,7 @@
 	</div>
 </dialog>
 
-<main class="flex flex-col items-center xl:grid min-h-screen max-h-screen grid-rows-2 bg-zinc-900 xl:grid-cols-2 xl:grid-rows-none">
+<main class="flex flex-col items-center xl:grid xl:min-h-screen max-h-screen grid-rows-2 bg-zinc-900 xl:grid-cols-2 xl:grid-rows-none">
 	<div class="flex items-center justify-center p-4 xl:p-32 pt-8">
 		<div>
 			<h1 class="mb-6 font-bold text-5xl">Chirpify</h1>
