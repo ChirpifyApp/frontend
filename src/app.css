@@ -10,4 +10,8 @@
 	.code-input {
 		@apply max-w-[2.5rem] px-3 py-2 text-lg text-zinc-100 bg-zinc-900 border border-zinc-700 border-opacity-50 rounded-lg text-center focus:border-blue-500 focus:outline-none focus:ring-1 focus:ring-blue-600;
 	}
+
+	.clip-bottom {
+		clip-path: polygon(100% 50%, 0 100%, 100% 100%, 50% 0, 0 100%);
+	}
 }
