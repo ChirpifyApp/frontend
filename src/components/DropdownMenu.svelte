@@ -1,4 +1,4 @@
-<script lang='ts'>
+<script lang="ts">
 	let show = false;
 	let dropdownRef: HTMLDivElement | undefined;
 
@@ -16,11 +16,10 @@
 
 <svelte:body on:click={hideDropdownMenu} />
 
-<slot name='button' {toggleDropdownMenu} />
+<slot name="button" {toggleDropdownMenu} />
 
 {#if show}
-	<div class='relative' bind:this={dropdownRef}>
-		<slot name='dropdown' />
+	<div class="relative" bind:this={dropdownRef}>
+		<slot name="dropdown" />
 	</div>
-
 {/if}

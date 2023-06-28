@@ -7,7 +7,7 @@
 </svelte:head>
 
 <main
-	class="flex h-full min-h-screen flex-col items-center justify-center gap-4 bg-zinc-900 text-zinc-100 max-w-s"
+	class="max-w-s flex h-full min-h-screen flex-col items-center justify-center gap-4 bg-zinc-900 text-zinc-100"
 >
 	<h1 class="border-b border-zinc-700 pb-4 font-semibold text-6xl">{$page.status}</h1>
 	<p class="mb-8">{$page.error?.message}</p>

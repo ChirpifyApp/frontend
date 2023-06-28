@@ -1,10 +1,10 @@
-<script context='module'>
+<script context="module">
 	import { PUBLIC_API_URL } from '$env/static/public';
 	import { weeklyPost } from '../../stores';
 
 	export async function fetchWeeklyPost() {
 		const response = await fetch(`${PUBLIC_API_URL}/posts/top/weekly`, {
-			credentials: 'include',
+			credentials: 'include'
 		});
 		if (response.status === 204) {
 			weeklyPost.set(null);
@@ -81,20 +81,21 @@
 	onMount(async () => {
 		await fetchWeeklyPost();
 	});
-
 </script>
 
 <svelte:head>
 	<title>Home</title>
 </svelte:head>
 
-<main class='min-h-screen bg-zinc-900 px-4 flex items-center flex-col'>
+<main class="flex min-h-screen flex-col items-center bg-zinc-900 px-4">
 	<HomeTopBar email={data.me.email} name={data.me.name} myId={data.me.id} />
-	<section class='min-w-screen flex w-full max-w-lg flex-col items-center justify-center bg-zinc-900'>
+	<section
+		class="min-w-screen flex w-full max-w-lg flex-col items-center justify-center bg-zinc-900"
+	>
 		<form
-			class='flex h-auto w-full max-w-lg gap-4 rounded-lg border border-zinc-700 border-opacity-50 p-4 basis-0'
+			class="flex h-auto w-full max-w-lg basis-0 gap-4 rounded-lg border border-zinc-700 border-opacity-50 p-4"
 		>
-			<img alt='Your avatar' class='mr-4 h-10 w-10 rounded-full' src={gravatarUrl} />
+			<img alt="Your avatar" class="mr-4 h-10 w-10 rounded-full" src={gravatarUrl} />
 			<div class="flex-grow">
 				<div class="mb-4 flex w-full justify-between">
 					<textarea
@@ -103,7 +104,8 @@
 						id="content"
 						name="content"
 						on:input={onContentChange}
-						placeholder='Type something...'></textarea>
+						placeholder="Type something..."
+					/>
 					<p
 						class="cursor-default {inputLength === maxInputLength
 							? 'text-red-400'
@@ -116,7 +118,7 @@
 					<div class="mb-4">
 						<img
 							src=""
-							alt='Post'
+							alt="Post"
 							class="w-full rounded-lg border border-zinc-700 border-opacity-50"
 							bind:this={previewImageElement}
 						/>
@@ -208,10 +210,10 @@
 				</div>
 			</div>
 		</form>
-		<h2 class='py-8 text-2xl font-bold self-start'>Weekly favourite</h2>
+		<h2 class="self-start py-8 font-bold text-2xl">Weekly favourite</h2>
 		{#if $weeklyPost !== undefined}
 			{#if $weeklyPost === null}
-				<p class='text-zinc-700'>No weekly post yet :)</p>
+				<p class="text-zinc-700">No weekly post yet :)</p>
 			{:else}
 				<Post
 					name={$weeklyPost.author.name}
@@ -221,10 +223,10 @@
 					likeCount={$weeklyPost.likedBy.length}
 					dislikeCount={$weeklyPost.dislikedBy.length}
 					liked={$weeklyPost.likedBy.find(user => user.id === data.me.id)
-				? 1
-				: $weeklyPost.dislikedBy.find(user => user.id === data.me.id)
-				? -1
-				: 0}
+						? 1
+						: $weeklyPost.dislikedBy.find(user => user.id === data.me.id)
+						? -1
+						: 0}
 					date={$weeklyPost.createdAt}
 					id={$weeklyPost.id}
 					myId={data.me.id}
@@ -234,7 +236,7 @@
 		{:else}
 			<LoadingPost />
 		{/if}
-		<h2 class='py-8 text-2xl font-bold self-start'>Most recent</h2>
+		<h2 class="self-start py-8 font-bold text-2xl">Most recent</h2>
 		<PostContainer endpoint="/posts/recent" userId={data.me.id} />
 	</section>
 </main>

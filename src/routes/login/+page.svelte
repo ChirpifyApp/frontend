@@ -80,8 +80,10 @@
 	</div>
 </dialog>
 
-<main class="flex flex-col items-center xl:grid xl:min-h-screen max-h-screen grid-rows-2 bg-zinc-900 xl:grid-cols-2 xl:grid-rows-none">
-	<div class="flex items-center justify-center p-4 xl:p-32 pt-8">
+<main
+	class="flex max-h-screen grid-rows-2 flex-col items-center bg-zinc-900 xl:grid xl:min-h-screen xl:grid-cols-2 xl:grid-rows-none"
+>
+	<div class="flex items-center justify-center p-4 pt-8 xl:p-32">
 		<div>
 			<h1 class="mb-6 font-bold text-5xl">Chirpify</h1>
 			<p class="mb-2 max-w-prose text-zinc-400">
@@ -97,7 +99,10 @@
 			</a>
 		</div>
 	</div>
-	<div class="flex items-center justify-center p-4 xl:p-32 w-full pt-16" transition:fade={{ duration: 150 }}>
+	<div
+		class="flex w-full items-center justify-center p-4 pt-16 xl:p-32"
+		transition:fade={{ duration: 150 }}
+	>
 		<div class="w-full max-w-prose xl:max-w-sm">
 			<h1 class="mb-6 font-semibold text-2xl">Welcome, please log in</h1>
 			<form
