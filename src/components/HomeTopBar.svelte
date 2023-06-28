@@ -25,7 +25,7 @@
 					slot="dropdown"
 				>
 					<div class="flex flex-col">
-						<div class="clip-bottom mr-4 h-2 w-4 self-end bg-zinc-800" />
+						<div class="clip-bottom mr-4 h-2 w-4 self-end bg-zinc-800"></div>
 						<div
 							class="rounded-t-lg border-b border-zinc-600 border-opacity-50 bg-zinc-800 px-6 py-4"
 						>
