@@ -48,7 +48,7 @@
 {#if loading}
 	<LoadingPost />
 {:else}
-	<div>
+	<div class='w-full'>
 		{#each $loadedPosts as post}
 			{#if post.id === $weeklyPost?.id}
 				<Post
