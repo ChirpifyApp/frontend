@@ -5,9 +5,8 @@
 	import Post from './Post.svelte';
 	import type { IPost } from '../interfaces';
 	import LoadingPost from './LoadingPost.svelte';
-	import { weeklyPost, loadedPosts } from '../stores';
+	import { weeklyPost, loadedPosts, myId } from '../stores';
 
-	export let userId: number;
 	export let endpoint: string;
 
 	let page = 1;
@@ -22,6 +21,7 @@
 		const json = await response.json();
 		if (json.data.length) {
 			newPosts = json.data;
+			$loadedPosts = [...$loadedPosts, ...newPosts];
 			page += 1;
 		}
 		loading = false;
@@ -35,6 +35,7 @@
 		console.debug('Fetched data into container:', json);
 		if (json.data.length) {
 			newPosts = json.data;
+			$loadedPosts = [...$loadedPosts, ...newPosts];
 			page += 1;
 
 			loaded();
@@ -42,8 +43,6 @@
 			complete();
 		}
 	}
-
-	$: $loadedPosts = [...$loadedPosts, ...newPosts];
 </script>
 
 {#if loading}
@@ -59,14 +58,13 @@
 					imageUrl={$weeklyPost.imageUrl}
 					likeCount={$weeklyPost.likedBy.length}
 					dislikeCount={$weeklyPost.dislikedBy.length}
-					liked={$weeklyPost.likedBy.find(user => user.id === userId)
+					liked={$weeklyPost.likedBy.find(user => user.id === $myId)
 						? 1
-						: $weeklyPost.dislikedBy.find(user => user.id === userId)
+						: $weeklyPost.dislikedBy.find(user => user.id === $myId)
 						? -1
 						: 0}
 					date={$weeklyPost.createdAt}
 					id={$weeklyPost.id}
-					myId={userId}
 					authorId={$weeklyPost.authorId}
 				/>
 			{:else}
@@ -77,14 +75,13 @@
 					imageUrl={post.imageUrl}
 					likeCount={post.likedBy.length}
 					dislikeCount={post.dislikedBy.length}
-					liked={post.likedBy.find(user => user.id === userId)
+					liked={post.likedBy.find(user => user.id === $myId)
 						? 1
-						: post.dislikedBy.find(user => user.id === userId)
+						: post.dislikedBy.find(user => user.id === $myId)
 						? -1
 						: 0}
 					date={post.createdAt}
 					id={post.id}
-					myId={userId}
 					authorId={post.authorId}
 				/>
 			{/if}

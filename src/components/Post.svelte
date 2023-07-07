@@ -1,10 +1,9 @@
 <script lang="ts">
 	import md5 from 'md5';
 	import { PUBLIC_API_URL } from '$env/static/public';
-	import { weeklyPost } from '../stores';
+	import { loadedPosts, myId, weeklyPost } from '../stores';
 	import { fetchWeeklyPost } from '../routes/home/+page.svelte';
 	import { fade } from 'svelte/transition';
-	import DropdownMenu from './DropdownMenu.svelte';
 
 	export let name: string | null;
 	export let email: string;
@@ -15,7 +14,6 @@
 	export let id: number;
 	export let liked: -1 | 0 | 1;
 	export let date: string;
-	export let myId: number;
 	export let authorId: number;
 
 	function formatDate(isoDateString: string) {
@@ -84,10 +82,39 @@
 		}
 	}
 
+	async function deletePost() {
+		const response = await fetch(`${PUBLIC_API_URL}/posts/${id}`, {
+			method: 'DELETE',
+			credentials: 'include',
+		});
+		console.log(response.status);
+		if (response.ok) {
+			loadedPosts.update((posts) => posts.filter((post) => post.id !== id));
+			await refreshWeeklyPost();
+		}
+	}
+
 	$: gravatarUrl = `https://www.gravatar.com/avatar/${md5(
 		email.toLocaleLowerCase().trim()
 	)}?s=48&d=retro&r=g`;
+
+	let dropdownRef: HTMLDivElement | undefined;
+	let showDropdown = false;
+
+	function toggleDropdownMenu(event: MouseEvent) {
+		event.stopPropagation();
+		showDropdown = !showDropdown;
+	}
+
+	function hideDropdownMenu(event: MouseEvent) {
+		if (!dropdownRef) return;
+		if (event.target === dropdownRef || dropdownRef.contains(event.target as Node)) return;
+		console.log('hiding dropdown menu');
+		showDropdown = false;
+	}
 </script>
+
+<svelte:body on:click={hideDropdownMenu} />
 
 <div
 	class="mb-4 flex w-full max-w-lg rounded-lg border border-zinc-700 border-opacity-50 p-4"
@@ -106,39 +133,46 @@
 			<div class="flex items-center">
 				<h4 class="mr-2 text-zinc-400">{formatDate(date)}</h4>
 				<!-- Context menu button -->
-				{#if authorId === myId}
-					<DropdownMenu let:toggleDropdownMenu>
-						<button slot="button" on:click={toggleDropdownMenu}>
-							<svg
-								class="stroke-zinc-400"
-								height="20px"
-								stroke-width="1.5"
-								viewBox="0 0 24 24"
-								width="20px"
-								xmlns="http://www.w3.org/2000/svg"
-							>
-								<path
-									d="M20 12.5a.5.5 0 100-1 .5.5 0 000 1zM12 12.5a.5.5 0 100-1 .5.5 0 000 1zM4 12.5a.5.5 0 100-1 .5.5 0 000 1z"
-									stroke-linecap="round"
-									stroke-linejoin="round"
-									stroke-width="1.5"
-								/>
-							</svg>
-						</button>
-						<div
-							class="absolute right-0 mt-4 shadow-lg"
-							transition:fade={{ duration: 50 }}
-							slot="dropdown"
+				{#if authorId === $myId}
+					<button on:click={toggleDropdownMenu}>
+						<svg
+							class='stroke-zinc-400'
+							height='20px'
+							stroke-width='1.5'
+							viewBox='0 0 24 24'
+							width='20px'
+							xmlns='http://www.w3.org/2000/svg'
 						>
-							<div class="flex flex-col">
-								<div
-									class="flex flex-col rounded-lg border-zinc-600 border-opacity-50 bg-zinc-800 px-6 py-2"
-								>
-									<button class="hover:text-neutral-400">Delete</button>
+							<path
+								d='M20 12.5a.5.5 0 100-1 .5.5 0 000 1zM12 12.5a.5.5 0 100-1 .5.5 0 000 1zM4 12.5a.5.5 0 100-1 .5.5 0 000 1z'
+								stroke-linecap='round'
+								stroke-linejoin='round'
+								stroke-width='1.5'
+							/>
+						</svg>
+					</button>
+					{#if showDropdown}
+						<div
+							bind:this={dropdownRef}
+							class='relative'>
+							<div
+								class='absolute right-0 mt-4 shadow-lg'
+								transition:fade={{ duration: 50 }}
+
+							>
+								<div class='flex flex-col'>
+									<div
+										class='flex flex-col rounded-lg border-zinc-600 border-opacity-50 bg-zinc-800 px-6 py-2'
+									>
+										<button class='hover:text-neutral-400'
+												on:click|preventDefault={() => {showDropdown = false; deletePost();
+									}}>Delete
+										</button>
+									</div>
 								</div>
 							</div>
 						</div>
-					</DropdownMenu>
+					{/if}
 				{/if}
 			</div>
 		</div>

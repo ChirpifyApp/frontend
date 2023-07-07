@@ -22,6 +22,7 @@
 	import { onMount } from 'svelte';
 	import Post from '../../components/Post.svelte';
 	import LoadingPost from '../../components/LoadingPost.svelte';
+	import { myId } from '../../stores';
 
 	export let data: PageData;
 
@@ -34,6 +35,8 @@
 	let textAreaElement: HTMLTextAreaElement;
 	let inputLength = 0;
 	const maxInputLength = 128;
+
+	$myId = data.me.id;
 
 	function onImageInputChange() {
 		if (imageInput.files === null) {
@@ -88,7 +91,7 @@
 </svelte:head>
 
 <main class="flex min-h-screen flex-col items-center bg-zinc-900 px-4">
-	<HomeTopBar email={data.me.email} name={data.me.name} myId={data.me.id} />
+	<HomeTopBar email={data.me.email} name={data.me.name} />
 	<section
 		class="min-w-screen flex w-full max-w-lg flex-col items-center justify-center bg-zinc-900"
 	>
@@ -104,8 +107,7 @@
 						id="content"
 						name="content"
 						on:input={onContentChange}
-						placeholder="Type something..."
-					/>
+						placeholder="Type something..."></textarea>
 					<p
 						class="cursor-default {inputLength === maxInputLength
 							? 'text-red-400'
@@ -230,7 +232,7 @@
 					date={$weeklyPost.createdAt}
 					id={$weeklyPost.id}
 					myId={data.me.id}
-					authorId={$weeklyPost.author.id}
+					authorId={$weeklyPost.authorId}
 				/>
 			{/if}
 		{:else}
