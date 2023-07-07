@@ -33,7 +33,7 @@
 
 	let imageInput: HTMLInputElement;
 	let previewImageElement: HTMLImageElement;
-	let showImage = false;
+	$: showImage = imageInput?.files === null ? false : imageInput?.files.length > 0;
 	let textAreaElement: HTMLTextAreaElement;
 	let inputLength = 0;
 	const maxInputLength = 128;
@@ -85,6 +85,7 @@
 
 	onMount(async () => {
 		await fetchWeeklyPost();
+		onImageInputChange();
 	});
 
 	let postingLoading = false;
@@ -154,7 +155,8 @@
 						name="content"
 						on:input={onContentChange}
 						placeholder="Type something..."
-						disabled={postingLoading}></textarea>
+						disabled={postingLoading}
+						required></textarea>
 					<p
 						class="cursor-default {inputLength === maxInputLength
 							? 'text-red-400'
