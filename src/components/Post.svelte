@@ -85,11 +85,11 @@
 	async function deletePost() {
 		const response = await fetch(`${PUBLIC_API_URL}/posts/${id}`, {
 			method: 'DELETE',
-			credentials: 'include',
+			credentials: 'include'
 		});
 		console.log(response.status);
 		if (response.ok) {
-			loadedPosts.update((posts) => posts.filter((post) => post.id !== id));
+			loadedPosts.update(posts => posts.filter(post => post.id !== id));
 			await refreshWeeklyPost();
 		}
 	}
@@ -136,37 +136,38 @@
 				{#if authorId === $myId}
 					<button on:click={toggleDropdownMenu}>
 						<svg
-							class='stroke-zinc-400'
-							height='20px'
-							stroke-width='1.5'
-							viewBox='0 0 24 24'
-							width='20px'
-							xmlns='http://www.w3.org/2000/svg'
+							class="stroke-zinc-400"
+							height="20px"
+							stroke-width="1.5"
+							viewBox="0 0 24 24"
+							width="20px"
+							xmlns="http://www.w3.org/2000/svg"
 						>
 							<path
-								d='M20 12.5a.5.5 0 100-1 .5.5 0 000 1zM12 12.5a.5.5 0 100-1 .5.5 0 000 1zM4 12.5a.5.5 0 100-1 .5.5 0 000 1z'
-								stroke-linecap='round'
-								stroke-linejoin='round'
-								stroke-width='1.5'
+								d="M20 12.5a.5.5 0 100-1 .5.5 0 000 1zM12 12.5a.5.5 0 100-1 .5.5 0 000 1zM4 12.5a.5.5 0 100-1 .5.5 0 000 1z"
+								stroke-linecap="round"
+								stroke-linejoin="round"
+								stroke-width="1.5"
 							/>
 						</svg>
 					</button>
 					{#if showDropdown}
-						<div
-							bind:this={dropdownRef}
-							class='relative'>
+						<div bind:this={dropdownRef} class="relative">
 							<div
-								class='absolute right-0 mt-4 shadow-lg'
+								class="absolute right-0 mt-4 shadow-lg"
 								transition:fade={{ duration: 50 }}
-
 							>
-								<div class='flex flex-col'>
+								<div class="flex flex-col">
 									<div
-										class='flex flex-col rounded-lg border-zinc-600 border-opacity-50 bg-zinc-800 px-6 py-2'
+										class="flex flex-col rounded-lg border-zinc-600 border-opacity-50 bg-zinc-800 px-6 py-2"
 									>
-										<button class='hover:text-neutral-400'
-												on:click|preventDefault={() => {showDropdown = false; deletePost();
-									}}>Delete
+										<button
+											class="hover:text-neutral-400"
+											on:click|preventDefault={() => {
+												showDropdown = false;
+												deletePost();
+											}}
+											>Delete
 										</button>
 									</div>
 								</div>

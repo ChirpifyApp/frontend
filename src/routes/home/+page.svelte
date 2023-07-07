@@ -107,7 +107,8 @@
 						id="content"
 						name="content"
 						on:input={onContentChange}
-						placeholder="Type something..."></textarea>
+						placeholder="Type something..."
+					/>
 					<p
 						class="cursor-default {inputLength === maxInputLength
 							? 'text-red-400'
